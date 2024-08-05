@@ -15,10 +15,8 @@ def create_faq(db: Session, faq: schemas.CreateFaq):
     db.refresh(db_faq)
     return db_faq
 
-def get_faq(db: Session, faq_id: int):
-    return db.query(models.Faq).filter(models.Faq.id == faq_id).first()
-
-def get_faqs(db: Session, skip: int = 0, limit: int = None):
+def get_faqs(db: Session, page: int = 1, limit: int = None):
+    skip = (page-1)*limit
     return db.query(models.Faq).offset(skip).limit(limit).all()
 
 def update_faq(db: Session, faq_id: int, faq: schemas.CreateFaq):

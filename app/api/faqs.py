@@ -1,5 +1,5 @@
 from typing import List
-from fastapi import HTTPException, Depends
+from fastapi import HTTPException, Depends, Query
 from sqlalchemy.orm import Session
 from starlette import status
 import models
@@ -17,6 +17,11 @@ router = APIRouter(
 @router.get('/get', response_model=List[schemas.CreateFaq])
 def get_faqs(db: Session = Depends(get_db)):
     faqs = crud.get_faqs(db=db)
+    return  faqs
+
+@router.get('/pag/{page}/{limit}', response_model=List[schemas.CreateFaq])
+def get_faqs_pagination(page:int , limit:int , db: Session = Depends(get_db)):
+    faqs = crud.get_faqs(db=db, page=page, limit=limit)
     return  faqs
 
 
