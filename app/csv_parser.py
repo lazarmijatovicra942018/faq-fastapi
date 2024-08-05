@@ -1,18 +1,23 @@
-import pandas as pd
+import csv
 from sqlalchemy.orm import Session
-from . import crud, schemas
+from crud import create_faq
+import models, schemas
 
 
-def read_csv(file_path: str) -> pd.DataFrame:
-    return pd.read_csv(file_path)
 
 def insert_faqs_from_csv(db: Session, file_path: str):
-    data = read_csv(file_path)
-    for _ , row in data.iterrows():
-        faq = schemas.FAQCreate(
-            question=row['question'],
-            answer=row['answer'],
-            category=row['category'],
-            url=row['url'] if 'url' in row else None
-        )
-        crud.create_faq(db=db, faq=faq)
+    with open(file_path, mode='r', encoding='utf-8-sig') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            faq = schemas.CreateFaq(
+                title=row['Article title - Question'],
+                subtitle=row['Article subtitle - Complementary'],
+                body=row['Article body - Answer'],
+                language=row['Article language'],
+                url=row['Article URL'],
+                category=row['Category'],
+                keywords=row['Keywords']
+            )
+
+            create_faq(db=db, faq=faq)
+            
