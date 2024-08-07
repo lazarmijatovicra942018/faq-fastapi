@@ -21,7 +21,7 @@ def get_faqs(db: Session = Depends(get_db)):
 
 @router.get('/pag/{page}/{limit}', response_model=List[schemas.FaqResponse])
 def get_faqs_pagination(page: int, limit: int, db: Session = Depends(get_db)):
-    faqs = crud.get_faqs(db=db, page=page, limit=limit)
+    faqs = crud.get_faqs(db=db, page=page, limit=limit, pagination=True)
     return faqs
 
 

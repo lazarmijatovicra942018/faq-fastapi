@@ -19,8 +19,18 @@ def create_faq(db: Session, faq: schemas.CreateFaq):
     return db_faq
 
 
-def get_faqs(db: Session, page: int = 1, limit: int = 10):
-    skip = (page)*limit
+def get_faqs(db: Session, page: int = 0, limit: int = 100, pagination=False):
+
+    if not pagination:
+        skip = 0
+        limit = None
+    else:
+        if page < 0:
+            page = 0
+        if limit < 0:
+            limit = 0
+        skip = (page)*limit
+
     return db.query(models.Faq).offset(skip).limit(limit).all()
 
 
