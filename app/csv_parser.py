@@ -1,8 +1,7 @@
 import csv
 from sqlalchemy.orm import Session
 from crud import create_faq
-import models, schemas
-
+import schemas
 
 
 def insert_faqs_from_csv(db: Session, file_path: str):
@@ -20,4 +19,3 @@ def insert_faqs_from_csv(db: Session, file_path: str):
             )
 
             create_faq(db=db, faq=faq)
-            

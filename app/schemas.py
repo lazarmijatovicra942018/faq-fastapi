@@ -1,4 +1,5 @@
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel
+from typing import Optional, List
 
 
 class FaqBase(BaseModel):
@@ -11,10 +12,17 @@ class FaqBase(BaseModel):
     keywords: str
 
     class Config:
-        orm_mode = True
-
+        from_attributes = True
 
 
 class CreateFaq(FaqBase):
+
+    pass
+
+
+class FaqResponse(FaqBase):
+    id: int
+    embedding: Optional[List[float]] = None
+
     class Config:
-        orm_mode = True
+        from_attributes = True
