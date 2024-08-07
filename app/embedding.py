@@ -41,8 +41,8 @@ ensure_nltk_data()
 
 nlp = spacy.load("en_core_web_sm")
 
-WOED2VEC_FILE_PATH = os.path.join(os.path.dirname(__file__),
-                                  'GoogleNews-vectors-negative300.bin.gz')
+WOED2VEC_FILE_PATH = os.path.join(os.path.dirname(__file__), "data",
+                                  "GoogleNews-vectors-negative300.bin.gz")
 
 
 def load_word2vec() -> KeyedVectors:
