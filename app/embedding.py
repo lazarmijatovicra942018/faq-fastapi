@@ -64,13 +64,10 @@ def load_word2vec() -> KeyedVectors:
     try:
         word2vec = KeyedVectors.load_word2vec_format(WOED2VEC_FILE_PATH,
                                                      binary=True)
-        print("Loaded Word2Vec model from local file.")
 
-    except (FileNotFoundError, ValueError) as e:
-        print(f"Failed to load Word2Vec model from local file: {e}")
-        print("Falling back to downloading the model...")
+    except (FileNotFoundError, ValueError):
+
         word2vec = downloader.load('word2vec-google-news-300')
-        print("Successfully downloaded and loaded Word2Vec model.")
 
     return word2vec
 

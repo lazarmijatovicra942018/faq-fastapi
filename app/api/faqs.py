@@ -44,7 +44,7 @@ def get_one_faq(id: int, db: Session = Depends(get_db)):
     if idv_faq is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail=f"The id: {id} you requested for"
-                            + " does not exist")
+                            " does not exist")
     return idv_faq
 
 
@@ -56,7 +56,7 @@ def delete_faq(id: int, db: Session = Depends(get_db)):
     if deleted_faq is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail=f"The id: {id} you requested for"
-                            + " does not exist")
+                            " does not exist")
 
 
 @router.put('/put/{id}', response_model=schemas.CreateFaq)

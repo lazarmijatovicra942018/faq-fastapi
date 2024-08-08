@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+sqlalchemy
+pgvector
+pydantic
+nltk
+gensim
+spacy
+psycopg2-binary
+alembic
